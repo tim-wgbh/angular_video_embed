@@ -1,8 +1,7 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "name": "angular_video_player",
+  "description": "Video embedding with closed captioning using JW Player",
+  "version": "0.5.0",
   "license": "MIT",
   "private": true,
   "dependencies": {

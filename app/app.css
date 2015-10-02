@@ -1,30 +1,99 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+body {
+  background: #000;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }
-
-.menu:before {
-  content: "[";
+.wrapper {
+  width: 100%;
 }
-
-.menu:after {
-  content: "]";
+.content {
+  margin: 0 auto;
+  max-width: 1024px;
 }
-
-.menu > li {
-  display: inline;
+select {
+  color: black;
+  font-size: 1.1em;
+  font-weight: bold;
 }
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.applied {
+  position:relative;
 }
-
-.menu > li:nth-child(1):before {
-  content: "";
+.applied img {
+  width: 100%;
+}
+#caption-example {
+  padding: 10px;
+  border-radius: 3px;
+  float: left;
+  width: 50%;
+  position: absolute;
+  left: 25%;
+  bottom: 60px;
+  min-height: 15%
+}
+#caption-example p {
+  margin: 0;
+  padding: 2px;
+}
+.content > p {
+  font-style: italic;
+}
+button {
+  padding: 5px 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: #333;
+  border-radius:7px;
+  display: table-cell;
+  vertical-align: middle;
+  margin-left: 10px;  
+}
+button:hover {
+  color: red;
+}
+.caption {
+  margin: 10px 0 0 0 ;
+  background: #fff;
+  padding: 10px 20px 20px 20px;;
+  border-radius: 10px;
+  color: black;
+}
+.attribution {
+  font-size: 11px;
+  color: #999;
+  text-align: right;
+  margin-top: 5px;
+}
+#ccSettings {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+#ccSettings a {
+  cursor: pointer;
+}
+#ccSettings a img {
+  width:25px;
+  height: 25px;
+}
+#ccSettings a img.selected {
+  border: solid 1px white;
+}
+#ccSettings td {
+  padding: 5px;
+  vertical-align: middle;
+}
+#ccSettings tr:first-child td {
+  vertical-align: top;
+}
+#ccSettings td h2{
+  margin: 0;
   padding: 0;
+}
+.hidden {
+  display: none;
 }
