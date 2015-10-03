@@ -21,17 +21,24 @@
   <div class="wrapper">
     <div class="content">
       <div id="jw_player"></div>
-      <p><button ng-click="toggleCC($event)">Show CC settings</button></p>
-      <table id="ccSettings" class="hidden">
+      <p><button ng-click="toggleModal($event)">Show CC settings</button></p>
+    </div>
+  </div>
+  
+  <div class="modal">
+    <div  id="ccSettings">
+      <table>
         <tr>
           <td colspan="3">
             <h2>Closed-captioning settings</h2>
+            <p class="hint">You will need to turn CC on again after changing styles</p>
+            <p class="hint">ESC to close without applying settings</p>
           <td>
           <td rowspan="5">
             <div class="applied">
-              <div id="caption-example" ng-style="windowStyle"><p ng-style="textStyle">(Lady Violet) - WHAT IS A WEEKEND?</div>
+              <div id="caption-example" ng-style="windowStyle"><p ng-style="textStyle">&gt;&gt;Lady Violet: WHAT IS A WEEKEND?</div>
               <img src="images/backdrop-image.jpg">
-              <button ng-click="applySettings(options)">Apply</button></p>
+              <p><button ng-click="applySettings(options)">Apply</button></p>
             </div>
           </td>
         <tr>
@@ -52,8 +59,8 @@
 
             <td>
                 Opacity:
-                <select ng-model='fontOpacity' ng-change="setCC('fontOpacity', fontOpacity)">
-                  <option ng-repeat="op in opacityOptions" value="{{op}}" ng-selected="{{op == '100'}}">{{op + '%'}}</option>
+                <select ng-model='options.captions.fontOpacity' ng-change="setCC('fontOpacity', options.captions.fontOpacity)">
+                  <option ng-repeat="op in opacityOptions" value="{{op}}">{{op + '%'}}</option>
                 </select>
             </td>
 
@@ -69,8 +76,8 @@
 
             <td>
                 Opacity:
-                <select ng-model='backgroundOpacity'  ng-change="setCC('backgroundOpacity', backgroundOpacity)">
-                  <option ng-repeat="op in opacityOptions" value="{{op}}" ng-selected="{{op == '75'}}">{{op + '%'}}</option>
+                <select ng-model='options.captions.backgroundOpacity'  ng-change="setCC('backgroundOpacity', options.captions.backgroundOpacity)">
+                  <option ng-repeat="op in opacityOptions" value="{{op}}">{{op + '%'}}</option>
                 </select>
             </td>
 
@@ -86,8 +93,8 @@
 
             <td>
                 Opacity:
-                <select ng-model='windowOpacity' ng-change="setCC('windowOpacity', windowOpacity)">
-                  <option ng-repeat="op in opacityOptions" value="{{op}}" ng-selected="{{op == '0'}}">{{op + '%'}}</option>
+                <select ng-model='options.captions.windowOpacity' ng-change="setCC('windowOpacity', options.captions.windowOpacity)">
+                  <option ng-repeat="op in opacityOptions" value="{{op}}">{{op + '%'}}</option>
                 </select>
             </td>
           </tr>
@@ -100,6 +107,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="http://content.jwplatform.com/libraries/UA6z4Hl9.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="js/app.js"></script>
   <script src="js/filters.js"></script>
