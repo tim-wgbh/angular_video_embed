@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
+  <style>
+    body {
+      background: #000;
+      color: white;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 15px;
+    }
+    .hint {
+      font-size: 0.8em;
+      font-style: italic;
+      color: #ccc;
+    }
+    input {
+      background: #eee;
+      color: #000;
+      font-style: italic;
+    }
+    .wrapper {
+      width: 100%;
+    }
+    .content {
+      margin: 0 auto;
+      max-width: 1024px;
+    }
+    #update {
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+    #embed-url {
+      margin-top: 10px;
+      border-radius: 7px;
+      padding: 10px;
+      min-height: 50px;
+      background-color: #cFc;
+      color: #333;
+      font-weight: bold;
+    }
+    .required.missing {
+      background-color: #Fcc;
+    }
+  </style>
+  <script type="text/javascript">
+    $(function() {
+      var selectText = function(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+            console.log(range);
+            $(range).wrap('span.highlight');
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            $(range).wrap('span.highlight');
+        }
+      }
+      var update = function() {
+          
+          var output = "http://video-embed.s3-website-us-east-1.amazonaws.com/index.html";
+          if ($('#video_file').val().match(/^http(s?):\/\/.*\.mp4$/)) {
+            output += "?video_file=" + encodeURI($('#video_file').val());
+            if  ($('#poster').val().match(/^http(s?):\/\/.*\.(png|gif|jpg)$/)) {
+              output += "&poster=" + encodeURI($('#poster').val());
+            }
+            if ($('#caption').val().trim() != '') {
+              output += "&caption=" + encodeURI($('#caption').val());
+            }
+            if ($('#attribution').val().trim() != '') {
+              output += "&attribution=" + encodeURI($('#attribution').val());
+            }
+            $('#embed-url').text(output);
+          }
+      }
+      var showMissing = function() {
+        $('.required').each(function() {
+          if ($(this).val().trim() == '') {
+            $(this).addClass('missing');
+          } else {
+            $(this).removeClass('missing');
+          }
+        });
+      }
+      
+      showMissing();
+            
+      $('body').on('keyup change', 'input,textarea', function() {
+        update();
+        showMissing();
+      });
+      $('body').on('click', '#embed-url', function() {
+        selectText('embed-url');
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="wrapper" >
+    <div class="content">
+      <h1>Video Embed Url Creator</h1>
+      <div>
+        <form id="url-creator">
+          <label>Video file URL (required):</label><br />
+          <input type="text" name="video_file" id="video_file" size="80"  class='required'/>
+          <p class="hint">e.g. https://s3.amazonaws.com/my-bucket/videos/my-video.mp4</p>
+          <br /><br />
+          <label>Poster image URL:</label><br />
+          <input type="text" name="poster" id="poster" size="80" />
+          <p class="hint">e.g. https://s3.amazonaws.com/my-bucket/images/my-video-poster.jpg</p>
+          <br /><br />
+          <label>Attribution (optional):</label><br />
+          <input type="text" name="attribution" id="attribution" size="40" />
+          <br /><br />
+          <label>Caption (optional):</label><br />
+          <textarea name="caption" id="caption" cols="60" rows="5" /></textarea>
+          <br /><br />
+        </form>
+      </div>
+      <br />
+      <label>Embed URL (click and copy)</label>
+      <div id="embed-url"></div>
+    </div>
+  </div>
+</body>
+</html>
