@@ -13,16 +13,18 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
     $scope.playerId = 'jw_player';
     
     // Get the URL playback parameters
+    console.log($location.search());
     $scope.urlParams = $location.search();
+    
     
     if (typeof $scope.urlParams.video_file == 'undefined') {
       var sourceFile = 'http://d38iwtzje88pzt.cloudfront.net/livehls/ngrp:Cube1_all/playlist.m3u8';
-      var posterImage = 'images/default_poster.gif';
+      var posterImage = '/app/images/default_poster.gif';
       $scope.liveStream = true;
     } else {
       var sourceFile = $scope.urlParams.video_file;
       if (typeof $scope.urlParams.poster == 'undefined') {
-        posterImage = 'images/default_poster.gif';
+        posterImage = '/app/images/default_poster.gif';
       } else {
         posterImage = $scope.urlParams.poster;
       }
@@ -71,7 +73,7 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
     $scope.options.aspectratio = '16:9';
     $scope.options.primary = 'flash';
     $scope.options.logo = {
-      file: 'images/WGBH_White.png',
+      file: '/app/images/WGBH_White.png',
       hide: true,
       margin: 12
     };

@@ -9,10 +9,10 @@
   <title>WGBH Video</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app/css/style.css">
+  <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="PlayerCtrl" >
   <!--[if lt IE 7]>
@@ -32,12 +32,12 @@
           <td colspan="3">
             <h2>Closed-captioning settings</h2>
             <p class="hint">You will need to turn CC on again after changing styles</p>
-            <p class="hint">ESC to close without applying settings</p>
+            <p class="hint">&lt;ESC&gt; to close without applying settings</p>
           <td>
           <td rowspan="5">
             <div class="applied">
               <div id="caption-example" ng-style="windowStyle"><p ng-style="textStyle">&gt;&gt;Lady Violet: WHAT IS A WEEKEND?</div>
-              <img src="images/backdrop-image.jpg">
+              <img src="/app/images/backdrop-image.jpg">
               <p><button ng-click="applySettings(options)">Apply</button></p>
             </div>
           </td>
@@ -54,7 +54,7 @@
                 <h3>Font</h3>
             </td>
             <td>
-              <a ng-repeat="color in (colorOptions | noTransparent)" ng-click="setCC('color', color.hex, $event)"><img ng-src="images/{{color.image}}" /></a>
+              <a ng-repeat="color in (colorOptions | noTransparent)" ng-click="setCC('color', color.hex, $event)"><img ng-src="/app/images/{{color.image}}" /></a>
             </td>
 
             <td>
@@ -71,7 +71,7 @@
                 <h3>Background</h3>
             </td>
             <td>
-              <a ng-repeat="color in colorOptions" ng-click="setCC('backgroundColor', color.hex)"><img ng-src="images/{{color.image}}" /></a>
+              <a ng-repeat="color in colorOptions" ng-click="setCC('backgroundColor', color.hex)"><img ng-src="/app/images/{{color.image}}" /></a>
             </td>
 
             <td>
@@ -88,7 +88,7 @@
                 <h3>Window</h3>
             </td>
             <td>
-                <a ng-repeat="color in colorOptions" ng-click="setCC('windowColor', color.hex)"><img ng-src="images/{{color.image}}" /></a>
+                <a ng-repeat="color in colorOptions" ng-click="setCC('windowColor', color.hex)"><img ng-src="/app/images/{{color.image}}" /></a>
             </td>
 
             <td>
@@ -107,12 +107,12 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="http://content.jwplatform.com/libraries/UA6z4Hl9.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+  <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="app/bower_components/angular/angular.js"></script>
+  <script src="app/js/app.js"></script>
+  <script src="app/js/filters.js"></script>
+  <script src="app/components/version/version.js"></script>
+  <script src="app/components/version/version-directive.js"></script>
+  <script src="app/components/version/interpolate-filter.js"></script>
 </body>
 </html>
