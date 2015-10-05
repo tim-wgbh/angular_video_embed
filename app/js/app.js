@@ -81,11 +81,14 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
       {
         image: posterImage,
         sources: [{
-          file: sourceFile,
-          type: 'mp4'
+          file: sourceFile
         }]
       }
     ];
+    // Set file type if file extension is m4v
+    if (sourceFile.split('.').pop() == 'm4v') {
+      $scope.options.playlist[0].sources[0].type = 'mp4';
+    }
     $scope.options.captions = {
       color: "#ffffff",
       fontOpacity: '100',
