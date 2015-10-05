@@ -64,8 +64,8 @@
       }
       var update = function() {
           
-          var output = "http://video-embed.s3-website-us-east-1.amazonaws.com/index.html";
-          if ($('#video_file').val().match(/^http(s?):\/\/.*\.mp4$/)) {
+          var output = "http://video-embed.s3-website-us-east-1.amazonaws.com/index.html#";
+          if ($('#video_file').val().match(/^http(s?):\/\/.*\.(m4v|mp4)$/)) {
             output += "?video_file=" + encodeURI($('#video_file').val());
             if  ($('#poster').val().match(/^http(s?):\/\/.*\.(png|gif|jpg)$/)) {
               output += "&poster=" + encodeURI($('#poster').val());

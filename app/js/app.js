@@ -13,10 +13,8 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
     $scope.playerId = 'jw_player';
     
     // Get the URL playback parameters
-    console.log($location.search());
     $scope.urlParams = $location.search();
-    
-    
+        
     if (typeof $scope.urlParams.video_file == 'undefined') {
       var sourceFile = 'http://d38iwtzje88pzt.cloudfront.net/livehls/ngrp:Cube1_all/playlist.m3u8';
       var posterImage = '/app/images/default_poster.gif';
@@ -30,6 +28,8 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
       }
       $scope.liveStream = $scope.urlParams.livestream ? true : false;
     }
+    
+    console.log(sourceFile);
 
    // Function declarations
     $scope.setCC = function(key = null, value = null, $event = null) {
@@ -82,6 +82,7 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
         image: posterImage,
         sources: [{
           file: sourceFile,
+          type: 'mp4'
         }]
       }
     ];
