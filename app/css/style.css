@@ -57,6 +57,14 @@ button:hover {
   margin: 0;
   padding: 2px;
 }
+.cc-settings-toggle {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 200;
+  display: none;
+  cursor: pointer;
+}
 .content > p {
   font-style: italic;
 }

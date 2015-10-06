@@ -29,27 +29,27 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
       $scope.liveStream = $scope.urlParams.livestream ? true : false;
     }
     
-    console.log(sourceFile);
-
    // Function declarations
-    $scope.setCC = function(key = null, value = null, $event = null) {
-      var captions = $scope.options.captions
-      if (key && value) {
+    $scope.setCC = function(key, value) {
+      var captions = $scope.options.captions;
+      if (typeof key != 'undefined' && typeof value != 'undefined') {
         if (key == 'fontSize') {
-          captions[key] = (parseInt(captions[key]) + value) +"px";
+          captions[key] = (parseInt(captions[key]) + value);
+          console.log(captions[key]);
         } else {
           captions[key] = value;
         }
       }
       $scope.textStyle = {'font-size': captions.fontSize + "px", 'color': captions.color, 'background-color': convertHex(captions.backgroundColor, captions.backgroundOpacity) };
       $scope.windowStyle = {'background-color': convertHex(captions.windowColor, captions.windowOpacity) };
-      if ($event) {
+      if (typeof $event != 'undefined') {
         jQuery($event.target).parent().parent().find('img').removeClass('selected');
         jQuery($event.target).addClass('selected');
       }      
     };
     
     $scope.toggleModal = function() {
+      $scope.thePlayer.pause();
       jQuery('.modal').css({ height: jQuery(window).height() + "px" });
       jQuery('.modal, #ccSettings').fadeToggle();
     }
@@ -64,7 +64,9 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
       if (playPosition) {
         thePlayer.seek(playPosition);
       }
-      thePlayer.play(true);
+      thePlayer.on('play', function() {
+        jQuery('.cc-settings-toggle').fadeIn();
+      }).play(true);
     };
     
     // Initialize player options
@@ -101,6 +103,9 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
     
     // Instantiate the player
     $scope.thePlayer = jwplayer($scope.playerId).setup($scope.options);
+    $scope.thePlayer.on('play', function() {
+      jQuery('.cc-settings-toggle').fadeIn();
+    });
     
     // Save the caption styles
     $scope.textStyle = $scope.setCC();
@@ -178,14 +183,17 @@ videoEmbedApp.controller('PlayerCtrl', ['$scope', '$location',
   
     $scope.opacityOptions = ['100','75','50','25','0'];   
      
-    // Set escape key to hide modal
-    jQuery(document).keyup(function(e) {
-      if ( e.keyCode == 27 ) {
-        jQuery('.modal, #ccSettings').fadeOut();
-      }
-    });
-  }]  
+  }]
 );
+
+jQuery(function() {
+  // Set escape key to hide modal
+  jQuery(document).keyup(function(e) {
+    if ( e.keyCode == 27 ) {
+      jQuery('.modal, #ccSettings').fadeOut();
+    }
+  });  
+});
 
 function convertHex(hex,opacity){
   hex = hex.replace('#','');
